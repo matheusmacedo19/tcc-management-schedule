@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tcc.Management.Schedule.Models;
 using Tcc.Management.Schedule.Data;
+using Tcc.Management.Schedule.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,34 +11,50 @@ namespace Tcc.Management.Schedule.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-  
-        public readonly AppDataContext _context;
-
-        public LoginController(AppDataContext context)
+        private LoginService _loginService;
+        public LoginController(LoginService loginService)
         {
-            _context = context;
+            _loginService = loginService;
         }
   
         // GET api/<Login>/
         [HttpGet]
-        public IActionResult Login([FromBody] Student student)
+        public IActionResult Login([FromBody] User user)
         {
-            var foundUser = _context.Students.FirstOrDefault(student);
-    
-            if (foundUser == null)
+            try
             {
-                // Usuário não encontrado ou credenciais inválidas
-                return BadRequest("Usuário ou senha inválidos.");
-            }
+                if (!_loginService.ValidateLogin(user))
+                {
+                    // Usuário não encontrado ou credenciais inválidas
+                    return BadRequest("Usuário ou senha inválidos.");
+                }
 
-            return Ok(student);
+                return Ok(user);
+
+            }
+            catch (Exception ex) 
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        // POST api/<CreateLogin>
+        // POST api/<CreateUser>
         [HttpPost]
-        public void CreateLogin([FromBody] string value)
+        public IActionResult CreateUser([FromBody] User user)
         {
-            
+            try
+            {
+                if (_loginService.CreateUser(user))
+                {
+                    return Ok(user);
+                }else
+                    return BadRequest();
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

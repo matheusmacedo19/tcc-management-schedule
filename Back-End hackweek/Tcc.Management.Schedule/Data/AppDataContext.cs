@@ -10,5 +10,7 @@ namespace Tcc.Management.Schedule.Data
 
         public DbSet<Student> Students {get; set;}
         public DbSet<Supervisor> Supervisors {get; set;}
+        public DbSet<User> Users { get; set;}   
+        public DbSet<Meeting> Meetings { get; set;}
     }
 }
