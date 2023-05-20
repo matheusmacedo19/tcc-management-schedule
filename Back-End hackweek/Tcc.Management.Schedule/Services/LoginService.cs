@@ -1,9 +1,10 @@
 ﻿using Tcc.Management.Schedule.Data;
+using Tcc.Management.Schedule.Interfaces;
 using Tcc.Management.Schedule.Models;
 
 namespace Tcc.Management.Schedule.Services
 {
-    public class LoginService
+    public class LoginService : ILoginService
     {
         public readonly AppDataContext _context;
 

@@ -2,6 +2,7 @@
 using Tcc.Management.Schedule.Models;
 using Tcc.Management.Schedule.Data;
 using Tcc.Management.Schedule.Services;
+using Tcc.Management.Schedule.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,8 +12,8 @@ namespace Tcc.Management.Schedule.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private LoginService _loginService;
-        public LoginController(LoginService loginService)
+        private ILoginService _loginService;
+        public LoginController(ILoginService loginService)
         {
             _loginService = loginService;
         }
