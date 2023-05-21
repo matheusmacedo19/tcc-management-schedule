@@ -18,16 +18,12 @@ namespace Tcc.Management.Schedule.Services
             {
                User? foundUser = _context.Users.Where(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
            
-                if(foundUser != null)
-                {
-                    return true;
-                }else
-                    return false;
+                return (foundUser != null);
 
             }
             catch (Exception ex)
             {
-                throw ex;
+                return false;
             }
         }
         public bool CreateUser(User user)
@@ -41,7 +37,7 @@ namespace Tcc.Management.Schedule.Services
             }
             catch (Exception ex)
             {
-                throw ex;
+                return false;
             }
         }
     }

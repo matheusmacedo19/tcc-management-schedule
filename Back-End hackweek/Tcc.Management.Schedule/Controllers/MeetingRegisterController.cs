@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tcc.Management.Schedule.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +9,11 @@ namespace Tcc.Management.Schedule.Controllers
     [ApiController]
     public class MeetingRegisterController : ControllerBase
     {
+        private readonly AppDataContext _contex;
+        public MeetingRegisterController(AppDataContext context)
+        {
+
+        }
         // GET: api/<MeetingRegisterController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -38,6 +44,7 @@ namespace Tcc.Management.Schedule.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+
         }
     }
 }
