@@ -8,12 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<AppDataContext>(options =>
-{
-    //Colocar options para MySql
-});
+builder.Services.AddDbContext<AppDataContext>();
 builder.Services.AddScoped<ILoginService, LoginService>();
-builder.Services.AddScoped<AppDataContext>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

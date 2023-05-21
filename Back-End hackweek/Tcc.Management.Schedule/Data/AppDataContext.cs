@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Tcc.Management.Schedule.Models;
+using Tcc.Management.Schedule.Utils;
 
 namespace Tcc.Management.Schedule.Data
 {
@@ -12,5 +14,13 @@ namespace Tcc.Management.Schedule.Data
         public DbSet<Supervisor> Supervisors {get; set;}
         public DbSet<User> Users { get; set;}   
         public DbSet<Meeting> Meetings { get; set;}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            }
+        }
     }
 }
